@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Rocketflychalenger',
       initialRoute: '/',
       routes: {
+        '/'       : ( BuildContext context ) => const HomePage(),
         
       },
     );
