@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:rocketflychalenger/src/models/detail_pokemon.dart';
 
 class CardPokemon extends StatelessWidget {
-  const CardPokemon({super.key});
+  final DetailPokemon pokemonDetail;
+  const CardPokemon({super.key, required this.pokemonDetail});
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
     return Container(
+      height: 150,
       decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(15))),
@@ -21,12 +24,12 @@ class CardPokemon extends StatelessWidget {
               width: screenSize.width * 0.40,
               child: Stack(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(10),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
                     child: FadeInImage(
-                      image: NetworkImage(
-                          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"),
-                      placeholder: AssetImage('assets/no-image.gif'),
+                      image: NetworkImage(pokemonDetail
+                          .sprites!.other!.officialArtwork.frontDefault),
+                      placeholder: const AssetImage('assets/no-image.gif'),
                       height: 140.0,
                       fit: BoxFit.cover,
                     ),
@@ -44,13 +47,16 @@ class CardPokemon extends StatelessWidget {
                 ],
               ),
             ),
-            const Text("0001"),
+            Text(pokemonDetail.id.toString()),
             SizedBox.fromSize(
               size: const Size(1, 6),
             ),
-            const Text(
-              "bulbasaur",
-              style: TextStyle(fontWeight: FontWeight.bold),
+            Text(
+              pokemonDetail.name,
+              style: const TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox.fromSize(
               size: const Size(1, 6),
@@ -63,21 +69,25 @@ class CardPokemon extends StatelessWidget {
                     color: Color.fromARGB(255, 229, 231, 235),
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
-                  child: const Text(
-                    "Grass",
+                  child: Text(
+                    pokemonDetail.types[0].type.name.toString(),
                   ),
                 ),
                 SizedBox.fromSize(
                   size: Size(screenSize.width * 0.02, 20),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 229, 231, 235),
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                  ),
-                  child: const Text("Poison"),
-                ),
+                // ignore: unnecessary_null_comparison
+                pokemonDetail.types.length > 1
+                    ? Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 229, 231, 235),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        child:
+                            Text(pokemonDetail.types[1].type.name.toString()),
+                      )
+                    : Container()
               ],
             )
           ],

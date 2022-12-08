@@ -1,15 +1,22 @@
 // ignore_for_file: use_full_hex_values_for_flutter_colors
 
-import 'package:flutter/material.dart';
 
-class SearchPokemon extends StatefulWidget {
-  const SearchPokemon({super.key});
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rocketflychalenger/src/bloc/searchPokemon/search_pokemon_bloc.dart';
+
+class SearchPokemonWidget extends StatefulWidget {
+  const SearchPokemonWidget({super.key});
 
   @override
-  State<SearchPokemon> createState() => _SearchPokemonState();
+  State<SearchPokemonWidget> createState() => _SearchPokemonState();
 }
 
-class _SearchPokemonState extends State<SearchPokemon> {
+
+
+class _SearchPokemonState extends State<SearchPokemonWidget> {
+  
+
   @override
   Widget build(BuildContext context) {
     TextEditingController controlador = TextEditingController();
@@ -21,6 +28,12 @@ class _SearchPokemonState extends State<SearchPokemon> {
             height: 50,
             child: TextField(
               controller: controlador,
+              onChanged: (change){
+                if(change.isEmpty){
+                  BlocProvider.of<SearchPokemonBloc>(context)
+                    .add(ReloadPokemonEvent());
+                }
+              },
               decoration: const InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xfffe1e1e1), width: 2.0),
@@ -29,7 +42,7 @@ class _SearchPokemonState extends State<SearchPokemon> {
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     borderSide:
-                        BorderSide(width: 3, color: Color(0xfffe1e1e1))),                
+                        BorderSide(width: 3, color: Color(0xfffe1e1e1))),
                 filled: true,
                 fillColor: Colors.white,
                 focusedBorder: OutlineInputBorder(
@@ -37,6 +50,7 @@ class _SearchPokemonState extends State<SearchPokemon> {
                     borderSide:
                         BorderSide(width: 0, color: Color(0xfffe1e1e1))),
                 hintText: 'Buscar un Pokemon',
+                
               ),
             )),
         SizedBox.fromSize(
@@ -46,7 +60,12 @@ class _SearchPokemonState extends State<SearchPokemon> {
           width: screenSize.width * 0.22,
           height: 50,
           child: TextButton(
-            onPressed: () => {},
+            onPressed: () {
+              if(controlador.text.isNotEmpty){
+                BlocProvider.of<SearchPokemonBloc>(context)
+                    .add(SearchPokemon(controlador.text));
+              }
+            },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.red),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(

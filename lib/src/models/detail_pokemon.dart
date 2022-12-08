@@ -12,24 +12,24 @@ String detailPokemonToJson(DetailPokemon data) => json.encode(data.toJson());
 
 class DetailPokemon {
     DetailPokemon({
-        required this.abilities,
-        required this.baseExperience,
-        required this.forms,
-        required this.gameIndices,
-        required this.height,
-        required this.heldItems,
-        required this.id,
-        required this.isDefault,
-        required this.locationAreaEncounters,
-        required this.moves,
-        required this.name,
-        required this.order,
-        required this.pastTypes,
-        required this.species,
-        required this.sprites,
-        required this.stats,
-        required this.types,
-        required this.weight,
+        this.abilities = const [],
+        this.baseExperience = 0,
+        this.forms = const [],
+        this.gameIndices = const [],
+        this.height = 0,
+        this.heldItems = const [],
+        this.id = 0,
+        this.isDefault = false,
+        this.locationAreaEncounters = '',
+        this.moves = const [],
+        this.name = '',
+        this.order = 0,
+        this.pastTypes = const [],
+        this.species,
+        this.sprites,
+        this.stats = const [],
+        this.types = const [],
+        this.weight = 0,
     });
 
     List<Ability> abilities;
@@ -45,24 +45,24 @@ class DetailPokemon {
     String name;
     int order;
     List<dynamic> pastTypes;
-    Species species;
-    Sprites sprites;
+    Species? species;
+    Sprites? sprites;
     List<Stat> stats;
     List<Type> types;
     int weight;
 
     factory DetailPokemon.fromJson(Map<String, dynamic> json) => DetailPokemon(
         abilities: List<Ability>.from(json["abilities"].map((x) => Ability.fromJson(x))),
-        baseExperience: json["base_experience"],
+        baseExperience: json["base_experience"] ?? 0,
         forms: List<Species>.from(json["forms"].map((x) => Species.fromJson(x))),
         gameIndices: List<GameIndex>.from(json["game_indices"].map((x) => GameIndex.fromJson(x))),
         height: json["height"],
         heldItems: List<dynamic>.from(json["held_items"].map((x) => x)),
-        id: json["id"],
+        id: json["id"] ?? 0,
         isDefault: json["is_default"],
         locationAreaEncounters: json["location_area_encounters"],
         moves: List<Move>.from(json["moves"].map((x) => Move.fromJson(x))),
-        name: json["name"],
+        name: json["name"] ?? "",
         order: json["order"],
         pastTypes: List<dynamic>.from(json["past_types"].map((x) => x)),
         species: Species.fromJson(json["species"]),
@@ -86,8 +86,8 @@ class DetailPokemon {
         "name": name,
         "order": order,
         "past_types": List<dynamic>.from(pastTypes.map((x) => x)),
-        "species": species.toJson(),
-        "sprites": sprites.toJson(),
+        "species": species!.toJson() ,
+        "sprites": sprites!.toJson() ,
         "stats": List<dynamic>.from(stats.map((x) => x.toJson())),
         "types": List<dynamic>.from(types.map((x) => x.toJson())),
         "weight": weight,
@@ -380,12 +380,12 @@ class RedBlue {
     String frontTransparent;
 
     factory RedBlue.fromJson(Map<String, dynamic> json) => RedBlue(
-        backDefault: json["back_default"],
-        backGray: json["back_gray"],
-        backTransparent: json["back_transparent"],
-        frontDefault: json["front_default"],
-        frontGray: json["front_gray"],
-        frontTransparent: json["front_transparent"],
+        backDefault: json["back_default"] ?? "",
+        backGray: json["back_gray"] ?? "",
+        backTransparent: json["back_transparent"] ?? "",
+        frontDefault: json["front_default"] ?? "",
+        frontGray: json["front_gray"] ?? "",
+        frontTransparent: json["front_transparent"] ?? "",
     );
 
     Map<String, dynamic> toJson() => {
@@ -482,11 +482,11 @@ class Gold {
     String frontTransparent;
 
     factory Gold.fromJson(Map<String, dynamic> json) => Gold(
-        backDefault: json["back_default"],
-        backShiny: json["back_shiny"],
-        frontDefault: json["front_default"],
-        frontShiny: json["front_shiny"],
-        frontTransparent: json["front_transparent"] == null ? null : json["front_transparent"],
+        backDefault: json["back_default"]??'',
+        backShiny: json["back_shiny"]??'',
+        frontDefault: json["front_default"]??'',
+        frontShiny: json["front_shiny"]??'',
+        frontTransparent: json["front_transparent"]??'',
     );
 
     Map<String, dynamic> toJson() => {
@@ -494,7 +494,7 @@ class Gold {
         "back_shiny": backShiny,
         "front_default": frontDefault,
         "front_shiny": frontShiny,
-        "front_transparent": frontTransparent == null ? null : frontTransparent,
+        "front_transparent": frontTransparent,
     };
 }
 
