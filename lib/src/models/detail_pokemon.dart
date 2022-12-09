@@ -290,39 +290,39 @@ class Versions {
 
 class Sprites {
     Sprites({
-        required this.backDefault,
-        required this.backFemale,
-        required this.backShiny,
-        required this.backShinyFemale,
-        required this.frontDefault,
-        required this.frontFemale,
-        required this.frontShiny,
-        required this.frontShinyFemale,
-        required this.other,
-        required this.versions,
-        required this.animated,
+        this.backDefault,
+        this.backFemale,
+        this.backShiny,
+        this.backShinyFemale,
+        this.frontDefault,
+        this.frontFemale,
+        this.frontShiny,
+        this.frontShinyFemale,
+        this.other,
+        this.versions,
+        this.animated,
     });
 
-    String backDefault;
+    String? backDefault;
     dynamic backFemale;
-    String backShiny;
+    String? backShiny;
     dynamic backShinyFemale;
-    String frontDefault;
+    String? frontDefault;
     dynamic frontFemale;
-    String frontShiny;
+    String? frontShiny;
     dynamic frontShinyFemale;
     Other? other;
     Versions? versions;
     Sprites? animated;
 
     factory Sprites.fromJson(Map<String, dynamic> json) => Sprites(
-        backDefault: json["back_default"],
+        backDefault: json["back_default"] ?? '',
         backFemale: json["back_female"],
-        backShiny: json["back_shiny"],
+        backShiny: json["back_shiny"] ?? '',
         backShinyFemale: json["back_shiny_female"],
-        frontDefault: json["front_default"],
+        frontDefault: json["front_default"] ?? '',
         frontFemale: json["front_female"],
-        frontShiny: json["front_shiny"],
+        frontShiny: json["front_shiny"] ?? '',
         frontShinyFemale: json["front_shiny_female"],
         other: json["other"] == null ? null : Other.fromJson(json["other"]),
         versions: json["versions"] == null ? null : Versions.fromJson(json["versions"]),
@@ -526,16 +526,16 @@ class GenerationIii {
 
 class Emerald {
     Emerald({
-        required this.frontDefault,
-        required this.frontShiny,
+        this.frontDefault,
+        this.frontShiny,
     });
 
-    String frontDefault;
-    String frontShiny;
+    String? frontDefault;
+    String? frontShiny;
 
     factory Emerald.fromJson(Map<String, dynamic> json) => Emerald(
-        frontDefault: json["front_default"],
-        frontShiny: json["front_shiny"],
+        frontDefault: json["front_default"] ?? '',
+        frontShiny: json["front_shiny"] ?? '',
     );
 
     Map<String, dynamic> toJson() => {
@@ -552,15 +552,15 @@ class Home {
         required this.frontShinyFemale,
     });
 
-    String frontDefault;
+    String? frontDefault;
     dynamic frontFemale;
-    String frontShiny;
+    String? frontShiny;
     dynamic frontShinyFemale;
 
     factory Home.fromJson(Map<String, dynamic> json) => Home(
-        frontDefault: json["front_default"],
+        frontDefault: json["front_default"] ?? '',
         frontFemale: json["front_female"],
-        frontShiny: json["front_shiny"],
+        frontShiny: json["front_shiny"] ?? '',
         frontShinyFemale: json["front_shiny_female"],
     );
 
@@ -654,13 +654,13 @@ class Other {
 
 class OfficialArtwork {
     OfficialArtwork({
-        required this.frontDefault,
+        this.frontDefault,
     });
 
-    String frontDefault;
+    String? frontDefault;
 
     factory OfficialArtwork.fromJson(Map<String, dynamic> json) => OfficialArtwork(
-        frontDefault: json["front_default"],
+        frontDefault: json["front_default"] ?? '',
     );
 
     Map<String, dynamic> toJson() => {

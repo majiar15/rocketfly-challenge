@@ -44,7 +44,7 @@ class CardPokemon extends StatelessWidget {
                         tag: pokemonDetail.name,
                         child: FadeInImage(
                           image: NetworkImage(pokemonDetail
-                              .sprites!.other!.officialArtwork.frontDefault),
+                              .sprites!.other!.officialArtwork.frontDefault!),
                           placeholder: const AssetImage('assets/no-image.gif'),
                           height: 140.0,
                           fit: BoxFit.cover,

@@ -39,7 +39,7 @@ class DetailPage extends StatelessWidget {
                   tag: pokemonDetail.name,
                   child: FadeInImage(
                     image: NetworkImage(pokemonDetail
-                        .sprites!.other!.officialArtwork.frontDefault),
+                        .sprites!.other!.officialArtwork.frontDefault!),
                     placeholder: const AssetImage('assets/no-image.gif'),
                     height: screenSize.height * 0.3,
                     fit: BoxFit.cover,
