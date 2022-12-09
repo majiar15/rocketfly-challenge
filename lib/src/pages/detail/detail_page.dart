@@ -6,6 +6,7 @@ import 'package:rocketflychalenger/src/bloc/favoritePokemon/favorite_pokemon_blo
 import 'package:rocketflychalenger/src/bloc/searchPokemon/search_pokemon_bloc.dart';
 import 'package:rocketflychalenger/src/models/detail_pokemon.dart';
 import 'package:rocketflychalenger/src/pages/detail/widgets/shrime_desciption.dart';
+import 'package:rocketflychalenger/src/util/number_to_string.dart';
 import 'package:rocketflychalenger/src/widgets/appbar.dart';
 
 class DetailPage extends StatelessWidget {
@@ -22,7 +23,7 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
         appBar: appbarMethod(context, true),
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
+          padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -49,7 +50,7 @@ class DetailPage extends StatelessWidget {
                 child: Container(
                   width: screenSize.width * 0.9,
                   height: screenSize.height * 0.5,
-                  padding: const EdgeInsets.all(25.0),
+                  padding: const EdgeInsets.all(20.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
@@ -136,8 +137,12 @@ class DetailPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Text("ID:"),
-                          Text(pokemonDetail.id.toString()),
+                          const Text(
+                            "ID:",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          Text(numberToStringZero(pokemonDetail.id)),
                         ],
                       ),
                       const SizedBox(
@@ -145,7 +150,11 @@ class DetailPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Text("ALTURA:"),
+                          const Text(
+                            "Altura:",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
                           Text(pokemonDetail.height.toString()),
                         ],
                       ),
@@ -154,7 +163,11 @@ class DetailPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Text("PESO:"),
+                          const Text(
+                            "Peso:",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
                           Text(pokemonDetail.weight.toString()),
                         ],
                       ),

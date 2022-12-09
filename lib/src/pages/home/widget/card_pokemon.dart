@@ -5,6 +5,7 @@ import 'package:rocketflychalenger/src/bloc/detailPokemon/detail_pokemon_bloc.da
 import 'package:rocketflychalenger/src/bloc/favoritePokemon/favorite_pokemon_bloc.dart';
 import 'package:rocketflychalenger/src/bloc/searchPokemon/search_pokemon_bloc.dart';
 import 'package:rocketflychalenger/src/models/detail_pokemon.dart';
+import 'package:rocketflychalenger/src/util/number_to_string.dart';
 
 class CardPokemon extends StatelessWidget {
   final DetailPokemon pokemonDetail;
@@ -75,7 +76,7 @@ class CardPokemon extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(pokemonDetail.id.toString()),
+              Text(numberToStringZero(pokemonDetail.id)),
               SizedBox.fromSize(
                 size: const Size(1, 6),
               ),
