@@ -38,3 +38,8 @@ class LoadingPokemonState extends SearchPokemonState {
 class LoadingGeneralPokemonState extends SearchPokemonState {
   const LoadingGeneralPokemonState():super ( resultPokemon: const []);
 }
+
+class MarkHeartRedStatus extends SearchPokemonState {
+  final List<DetailPokemon> pokemonDetail;
+  const MarkHeartRedStatus(this.pokemonDetail):super ( resultPokemon: pokemonDetail);
+}

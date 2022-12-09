@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:rocketflychalenger/src/models/detail_pokemon.dart';
+import 'package:rocketflychalenger/src/models/pokemon_favorites_sql.dart';
 import 'package:rocketflychalenger/src/providers/pokemon_provider.dart';
 
 part 'search_pokemon_event.dart';
@@ -16,16 +17,23 @@ class SearchPokemonBloc extends Bloc<SearchPokemonEvent, SearchPokemonState> {
   int offset = 0;
 
   SearchPokemonBloc() : super(const SearchPokemonInitial()) {
+
     on<PokemonInitial>((event, emit) async {
       emit(const LoadingGeneralPokemonState());
-
+      final pokemoFavorite = await getAllPokemonsHome();
       final respose = await pokemonProvider.getPokemonList(offset.toString());
 
       for (var element in respose.results) {
-        final pokemonDetail =
+        DetailPokemon pokemonDetail =
             await pokemonProvider.getPokemonDetail(element.url);
+
+        // ver marcar los pokemones favoritos
+        bool exists = pokemoFavorite.any((favorite) => favorite.pokemonId == pokemonDetail.id);
+        if(exists) pokemonDetail.favorite = true;
+        
         pokemonDetailList.add(pokemonDetail);
       }
+      
       emit(SearchSuccess(pokemonDetailList));
     });
 
@@ -62,6 +70,24 @@ class SearchPokemonBloc extends Bloc<SearchPokemonEvent, SearchPokemonState> {
       emit(SearchSuccess(pokemonDetailList));
 
       //log(event.searchValue.toString());
+    });
+  
+    on<MarkHeartRedEvent>((event, emit) async {
+      log("entro al evento :c");
+      emit(SearchSuccess(pokemonDetailList));
+      log(pokemonDetailList.toString());
+
+      pokemonDetailList.map((pokemon){
+        log("Afuera del true :c");
+        if(event.id == pokemon.id){
+          log("entro bien al true");
+
+            pokemon.favorite = !pokemon.favorite;
+
+        }
+        return pokemon;
+      }).toList();
+      emit(MarkHeartRedStatus(pokemonDetailList));
     });
   }
 }

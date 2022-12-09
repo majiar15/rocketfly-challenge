@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:rocketflychalenger/src/bloc/favoritePokemon/favorite_pokemon_bloc.dart';
+import 'package:rocketflychalenger/src/bloc/searchPokemon/search_pokemon_bloc.dart';
 import 'package:rocketflychalenger/src/models/detail_pokemon.dart';
 
 class CardPokemon extends StatelessWidget {
@@ -9,7 +12,8 @@ class CardPokemon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-
+    final favoritePokemonBloc = BlocProvider.of<FavoritePokemonBloc>(context);
+    final searchPokemonBloc = BlocProvider.of<SearchPokemonBloc>(context);
     return Container(
       height: 150,
       decoration: const BoxDecoration(
@@ -37,10 +41,24 @@ class CardPokemon extends StatelessWidget {
                   Positioned(
                     left: 120,
                     child: IconButton(
-                        onPressed: () => {},
-                        icon: SvgPicture.asset(
+                        onPressed: () {
+                          
+                          favoritePokemonBloc.add(AddFavoriteEvent(pokemonDetail));
+                          searchPokemonBloc.add(MarkHeartRedEvent(pokemonDetail.id));
+
+
+                        },
+                        icon: pokemonDetail.favorite
+                        ? SvgPicture.asset(
+                          'assets/heart-filled.svg',
+                          semanticsLabel: 'heart',
+                          color: Colors.red,
+                          width: 100,
+                        )
+                        : SvgPicture.asset(
                           'assets/heart.svg',
-                          semanticsLabel: 'Logo',
+                          semanticsLabel: 'heart',
+                          
                           width: 100,
                         )),
                   ),

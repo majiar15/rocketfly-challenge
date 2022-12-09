@@ -12,7 +12,7 @@ class PokemonProvider {
     final url = Uri.https(urlBase, '/api/v2/pokemon', {'offset': offset, "limit": "12"});
     final resp = await http.get(url);
     
-    final decodedData = json.decode(resp.body);
+    final decodedData = json.decode(resp.body.toString());
     
     
 
@@ -25,7 +25,7 @@ class PokemonProvider {
     final uri = Uri.parse(url);
     final resp = await http.get(uri);
     
-    final decodedData = json.decode(resp.body);
+    final decodedData = json.decode(resp.body.toString());
     
 
     final pokemon = DetailPokemon.fromJson(decodedData);
@@ -34,10 +34,10 @@ class PokemonProvider {
   }
   Future<DetailPokemon?> searchPokemon(String pokemon) async {
     
-    final url = Uri.https(urlBase, '/api/v2/pokemon/$pokemon',);
+    final url = Uri.https(urlBase, '/api/v2/pokemon/$pokemon');
     try {
       final resp = await http.get(url);
-      final decodedData = json.decode(resp.body);
+      final decodedData = json.decode(resp.body.toString());
       
 
       final returnPokemon = DetailPokemon.fromJson(decodedData);

@@ -30,6 +30,7 @@ class DetailPokemon {
         this.stats = const [],
         this.types = const [],
         this.weight = 0,
+        this.favorite = false,
     });
 
     List<Ability> abilities;
@@ -50,6 +51,7 @@ class DetailPokemon {
     List<Stat> stats;
     List<Type> types;
     int weight;
+    bool favorite = false;
 
     factory DetailPokemon.fromJson(Map<String, dynamic> json) => DetailPokemon(
         abilities: List<Ability>.from(json["abilities"].map((x) => Ability.fromJson(x))),

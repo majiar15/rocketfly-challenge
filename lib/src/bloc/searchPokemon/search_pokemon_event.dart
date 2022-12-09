@@ -19,5 +19,9 @@ class ReloadPokemonEvent extends SearchPokemonEvent {
  
   ReloadPokemonEvent();
 }
+class MarkHeartRedEvent extends SearchPokemonEvent {
+  final int id;
+  MarkHeartRedEvent(this.id);
+}
 
 class PokemonInitial extends SearchPokemonEvent {}

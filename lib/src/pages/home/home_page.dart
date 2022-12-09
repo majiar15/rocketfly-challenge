@@ -4,11 +4,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rocketflychalenger/src/bloc/searchPokemon/search_pokemon_bloc.dart';
 import 'package:rocketflychalenger/src/pages/home/widget/card_pokemon.dart';
 import 'package:rocketflychalenger/src/pages/home/widget/card_pokemon_shrimme.dart';
-import 'package:rocketflychalenger/src/widgets/circle_notificacion.dart';
+import 'package:rocketflychalenger/src/widgets/appbar.dart';
 import 'package:rocketflychalenger/src/pages/home/widget/search_pokemon.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,31 +38,7 @@ class _HomePageState extends State<HomePage> {
     listenerScroll(context, searchPokemonBloc);
 
     return Scaffold(
-        appBar: AppBar(
-          title: SvgPicture.asset('assets/logo.svg', semanticsLabel: 'Logo'),
-          backgroundColor: Colors.white,
-          actions: [
-            Stack(
-              children: [
-                IconButton(
-                    onPressed: () => {},
-                    icon: SvgPicture.asset(
-                      'assets/heart-filled.svg',
-                      semanticsLabel: 'Logo',
-                      width: 100,
-                    )),
-                const Positioned(
-                  bottom: 20,
-                  left: 12,
-                  child: CircleNotification(),
-                ),
-              ],
-            ),
-            SizedBox.fromSize(
-              size: const Size(15, 10),
-            )
-          ],
-        ),
+        appBar: appbarMethod(context,true),
         backgroundColor: const Color.fromARGB(243, 243, 244, 246),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
@@ -83,57 +58,18 @@ class _HomePageState extends State<HomePage> {
                 SizedBox.fromSize(
                   size: const Size(0, 20),
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: const [
-                //     CardPokemon(),
-                //     CardPokemon(),
-                //   ],
-                // ),
-                // SizedBox.fromSize(
-                //   size: const Size(0, 20),
-                // ),
                 BlocBuilder<SearchPokemonBloc, SearchPokemonState>(
                     builder: ((context, state) {
                   return state is LoadingGeneralPokemonState
                       ? loadingGeneralPokemon()
                       : gridCardPokemon(state);
                 }))
-                // Scrollbar(
-
-                //   child: FutureBuilder(
-                //       future: pokeProvider.getPokemonList(),
-                //       builder: (BuildContext context,
-                //           AsyncSnapshot<ListPokemon> snapshot) {
-                //         if (snapshot.connectionState == ConnectionState.done) {
-                //           return snapshot.data != null
-                //               ? ListView.builder(
-                //                   physics: const NeverScrollableScrollPhysics(),
-                //                   shrinkWrap: true,
-                //                   itemCount: snapshot.data!.results.length,
-                //                   itemBuilder: (BuildContext context, int index){
-                //                     return Text(snapshot.data!.results[index].name);
-                //                   },
-                //                 )
-                //               : const Text("Not Data");
-                //         } else {
-                //           return const Text("Loadding...");
-                //         }
-                //       }),
-                // )
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: const[
-                //     CardPokemon(),
-                //     CardPokemon(),
-
-                //   ],
-                // ),
               ],
             ),
           ),
         ));
   }
+
 
   Widget gridCardPokemon(SearchPokemonState state) {
     
