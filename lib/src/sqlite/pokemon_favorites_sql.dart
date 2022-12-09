@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -58,7 +58,7 @@ Future<List<PokemonFavoritesSQL>> getAllPokemonsHome() async {
   final Database db = await openDb();
 
   final List<Map<String, dynamic>> maps = await db.query('pokemonFavorite', columns: ['id', 'pokemonId']);
-  log(maps.toString());
+  
 
   return List.generate(maps.length, (i) {
     return PokemonFavoritesSQL(

@@ -1,11 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:rocketflychalenger/src/models/detail_pokemon.dart';
-import 'package:rocketflychalenger/src/models/pokemon_favorites_sql.dart';
+import 'package:rocketflychalenger/src/sqlite/pokemon_favorites_sql.dart';
 import 'package:rocketflychalenger/src/providers/pokemon_provider.dart';
 
 part 'search_pokemon_event.dart';
@@ -38,7 +37,7 @@ class SearchPokemonBloc extends Bloc<SearchPokemonEvent, SearchPokemonState> {
     });
 
     on<SearchPokemon>((event, emit) async {
-      log("entroe al evento");
+      
 
       emit(const LoadingGeneralPokemonState());
 
@@ -69,18 +68,17 @@ class SearchPokemonBloc extends Bloc<SearchPokemonEvent, SearchPokemonState> {
 
       emit(SearchSuccess(pokemonDetailList));
 
-      //log(event.searchValue.toString());
+      
     });
   
     on<MarkHeartRedEvent>((event, emit) async {
-      log("entro al evento :c");
+      
       emit(SearchSuccess(pokemonDetailList));
-      log(pokemonDetailList.toString());
 
       pokemonDetailList.map((pokemon){
-        log("Afuera del true :c");
+      
         if(event.id == pokemon.id){
-          log("entro bien al true");
+      
 
             pokemon.favorite = !pokemon.favorite;
 

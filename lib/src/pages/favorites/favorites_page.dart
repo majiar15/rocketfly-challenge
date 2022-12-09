@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,10 +71,11 @@ class _FavoritePageState extends State<FavoritePage> {
     //   ),
     // );
   }
+
 }
 
 Widget gridCardPokemon(FavoritePokemonState state) {
-  log(state.pokemonDetail.toString());
+  
   if (state.pokemonDetail.isEmpty) {
     return const Text("No hay pokemones favoritos :c");
   }

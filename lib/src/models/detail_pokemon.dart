@@ -426,34 +426,34 @@ class GenerationIi {
 
 class Crystal {
     Crystal({
-        required this.backDefault,
-        required this.backShiny,
-        required this.backShinyTransparent,
-        required this.backTransparent,
-        required this.frontDefault,
-        required this.frontShiny,
-        required this.frontShinyTransparent,
-        required this.frontTransparent,
+        this.backDefault,
+        this.backShiny,
+        this.backShinyTransparent,
+        this.backTransparent,
+        this.frontDefault,
+        this.frontShiny,
+        this.frontShinyTransparent,
+        this.frontTransparent,
     });
 
-    String backDefault;
-    String backShiny;
-    String backShinyTransparent;
-    String backTransparent;
-    String frontDefault;
-    String frontShiny;
-    String frontShinyTransparent;
-    String frontTransparent;
+    String? backDefault;
+    String? backShiny;
+    String? backShinyTransparent;
+    String? backTransparent;
+    String? frontDefault;
+    String? frontShiny;
+    String? frontShinyTransparent;
+    String? frontTransparent;
 
     factory Crystal.fromJson(Map<String, dynamic> json) => Crystal(
-        backDefault: json["back_default"],
-        backShiny: json["back_shiny"],
-        backShinyTransparent: json["back_shiny_transparent"],
-        backTransparent: json["back_transparent"],
-        frontDefault: json["front_default"],
-        frontShiny: json["front_shiny"],
-        frontShinyTransparent: json["front_shiny_transparent"],
-        frontTransparent: json["front_transparent"],
+        backDefault: json["back_default"]  ?? '',
+        backShiny: json["back_shiny"]  ?? '',
+        backShinyTransparent: json["back_shiny_transparent"]  ?? '',
+        backTransparent: json["back_transparent"]  ?? '',
+        frontDefault: json["front_default"]  ?? '',
+        frontShiny: json["front_shiny"]  ?? '',
+        frontShinyTransparent: json["front_shiny_transparent"]  ?? '',
+        frontTransparent: json["front_transparent"]  ?? '',
     );
 
     Map<String, dynamic> toJson() => {
@@ -594,15 +594,15 @@ class GenerationVii {
 
 class DreamWorld {
     DreamWorld({
-        required this.frontDefault,
+        this.frontDefault,
         required this.frontFemale,
     });
 
-    String frontDefault;
+    String? frontDefault;
     dynamic frontFemale;
 
     factory DreamWorld.fromJson(Map<String, dynamic> json) => DreamWorld(
-        frontDefault: json["front_default"],
+        frontDefault: json["front_default"] ?? '',
         frontFemale: json["front_female"],
     );
 

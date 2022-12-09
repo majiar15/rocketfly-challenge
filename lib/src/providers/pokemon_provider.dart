@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:rocketflychalenger/constants.dart';
+import 'package:rocketflychalenger/src/models/description_pokemon.dart';
 import 'package:rocketflychalenger/src/models/detail_pokemon.dart';
 
 import 'package:rocketflychalenger/src/models/list_pokemon.dart';
@@ -49,4 +50,24 @@ class PokemonProvider {
     }
     
   }
+
+  Future<DescriptionPokemon?> descriptionPokemon(String pokemon) async {
+    
+    final url = Uri.https(urlBase, '/api/v2/pokemon-species/$pokemon');
+    try {
+      final resp = await http.get(url);
+      final decodedData = json.decode(resp.body.toString());
+      
+
+      final returnPokemon = DescriptionPokemon.fromJson(decodedData);
+      
+      return returnPokemon;
+      
+    } catch (e) {
+      return null;
+    }
+    
+  }
+
+
 }

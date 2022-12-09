@@ -1,6 +1,5 @@
 // ignore_for_file: use_full_hex_values_for_flutter_colors
 
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -104,7 +103,7 @@ class _HomePageState extends State<HomePage> {
     scrollController.addListener(() {
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent) {
-        log("Sigueiente pagiancion");
+        
 
         searchPokemonBloc
             .add(PaginatedPokemonEvent(searchPokemonBloc.offset + 12));

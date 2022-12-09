@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rocketflychalenger/src/bloc/detailPokemon/detail_pokemon_bloc.dart';
 import 'package:rocketflychalenger/src/bloc/favoritePokemon/favorite_pokemon_bloc.dart';
 import 'package:rocketflychalenger/src/bloc/searchPokemon/search_pokemon_bloc.dart';
+import 'package:rocketflychalenger/src/pages/detail/detail_page.dart';
 import 'package:rocketflychalenger/src/pages/favorites/favorites_page.dart';
 import 'package:rocketflychalenger/src/pages/home/home_page.dart';
 
@@ -12,7 +14,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
             lazy: false,
             create: (_) => SearchPokemonBloc()..add(PokemonInitial())),
         BlocProvider(create: (_) => FavoritePokemonBloc()..add(GetNumberFavoritesEvent())),
+        BlocProvider(create: (_) => DetailPokemonBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -29,6 +32,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (BuildContext context) => const HomePage(),
           '/favorite': (BuildContext context) => const FavoritePage(),
+          '/detail': (BuildContext context) => const DetailPage(),
         },
       ),
     );
